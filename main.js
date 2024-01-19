@@ -15,13 +15,14 @@
 // Esistono dei metodi per trasformare una data in millisecondi?
 
 // Imposta la data di fine del conto alla rovescia (09:30 di domani)
-const endDate = new Date();
-endDate.setDate(endDate.getDate());
-endDate.setHours(9, 30, 0, 0);
+const endDate = new Date( "jan 19, 2024 10:16:00").getTime();
+
+console.log( endDate)
 
 // Funzione per aggiornare il conto alla rovescia
-function updateCountdown() {
-    const now = new Date();
+const updateCountdown = setInterval (function() {
+
+    const now = new Date().getTime();
     const timeDifference = endDate - now;
 
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
@@ -36,14 +37,15 @@ function updateCountdown() {
 
     document.querySelector('.seconds .first .number').textContent = Math.floor(seconds / 10);
     document.querySelector('.seconds .second .number').textContent = seconds % 10;
-}
 
+    console.log('ore:' + hours, 'minuti:' + minutes, 'secondi:' + seconds)
 
+    if(timeDifference < 0){
+        clearInterval(updateCountdown)
+    } else {
+        
+    }
 
-// Aggiorna il conto alla rovescia ogni secondo
-setInterval(updateCountdown, 1000);
-
-// Chiamata iniziale per evitare il ritardo di un secondo
-updateCountdown();
+}, 1000)
 
 // Termianto esercizio
